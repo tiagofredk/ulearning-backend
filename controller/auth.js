@@ -23,7 +23,7 @@ async function login(req, res) {
                 req.session.authenticated = true
                 req.session.token = token
                 // res.cookie("token", token).send("authenticated")
-                res.send("authenticated")
+                res.send({success: "authenticated"})
                 // console.log(token);
             } else {
                 next({ message: "incorrect password" })
