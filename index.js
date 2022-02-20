@@ -20,7 +20,7 @@ connectDB();
 // app.options("*", corsMw);
 // app.use(corsMw);
 //v1
-app.get("/test", (req, res)=> {
+app.get("/", (req, res)=> {
     res.send({
         status: 200,
         message: "Api is working"
