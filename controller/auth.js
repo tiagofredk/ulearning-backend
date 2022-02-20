@@ -29,7 +29,8 @@ async function login(req, res) {
                 next({ message: "incorrect password" })
             }
         } else {
-            next({ message: "incorrect email" })
+            // next({ message: "incorrect email" })
+            console.log("incorrect email");
         }
     } catch (err) {
         // next(err)
