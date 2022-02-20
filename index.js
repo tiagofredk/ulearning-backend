@@ -19,6 +19,7 @@ connectDB();
 // setup CORS logic
 // app.options("*", corsMw);
 // app.use(corsMw);
+//v1
 app.get("/test", (req, res)=> {
     res.send({
         status: 200,
