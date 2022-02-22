@@ -1,7 +1,8 @@
 // const authService = require('../service/auth');
-const users = require("../schema/newuser")
+const users = require("../schema/newuser");
 const bcrypt = require('bcrypt');
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const newuser = require("../schema/newuser");
 
 async function login(req, res) {
     const {email, password} = req.body;
@@ -62,8 +63,27 @@ async function verifytoken (req, res){
     }
 }
 
+async function adduser (req, res, next) {
+    try {
+        const hashPassword = bcrypt.hashSync(req.body.password, 10)
+        const newUsercopy = new newuser({
+            ...req.body,
+            password: hashPassword
+        });
+        await newUsercopy.save()
+            .then(data => {
+                res.json(data)
+                console.log("data collected");
+            })
+
+    } catch (err) {
+        next(err)
+    }
+}
+
 module.exports = {
     login,
     logout,
-    verifytoken
+    verifytoken,
+    adduser
 };

@@ -12,14 +12,6 @@ const newUser = new mongoose.Schema({
     password: {
         type: String,
         
-    },
-    classe: {
-        type: String,
-        
-    },
-    role: {
-        type: String,
-        
     }
 },{
     toJSON:{
