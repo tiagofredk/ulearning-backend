@@ -7,9 +7,6 @@ const newuser = require("../schema/newuser");
 async function login(req, res) {
     const {email, password} = req.body;
     
-    // perform payload validation
-    // in prod, always use a validation library like joi
-    // for this tutorial, we only do basic validation
     if (!email || !password) {
         return res.status(400).json('Bad request params - you need to provide an email and a password');
     }
