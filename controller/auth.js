@@ -24,10 +24,12 @@ async function login(req, res) {
                 res.send(user);
                 // console.log(token);
             } else {
+                res.send({message: "Incorrect password"})
                 next({ message: "incorrect password" })
             }
         } else {
             // next({ message: "incorrect email" })
+            res.send({message: "Incorrect email"})
             console.log("incorrect email");
         }
     } catch (err) {
