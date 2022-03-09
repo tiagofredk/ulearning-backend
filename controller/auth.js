@@ -5,12 +5,12 @@ const jwt = require("jsonwebtoken");
 const newuser = require("../schema/newuser");
 
 async function login(req, res) {
-    const {email, password} = req.body;
-    
+    const { email, password } = req.body;
+
     if (!email || !password) {
         return res.status(400).json('Bad request params - you need to provide an email and a password');
     }
-    
+
     const user = await users.findOne({ email: email })
     console.log(user);
     try {
@@ -24,12 +24,12 @@ async function login(req, res) {
                 res.send(user);
                 // console.log(token);
             } else {
-                res.send({message: "Incorrect password"})
+                res.send({ message: "Incorrect password" })
                 next({ message: "incorrect password" })
             }
         } else {
             // next({ message: "incorrect email" })
-            res.send({message: "Incorrect email"})
+            res.send({ message: "Incorrect email" })
             console.log("incorrect email");
         }
     } catch (err) {
@@ -38,31 +38,31 @@ async function login(req, res) {
     }
 }
 
-async function logout (req, res){
-    try{
+async function logout(req, res) {
+    try {
         req.session.destroy()
-        res.send({message: "session destroyed"})
+        res.send({ message: "session destroyed" })
         console.log("session destroyed");
-    }catch(err){
+    } catch (err) {
         console.log(err);
     }
 }
 
-async function verifytoken (req, res){
-    try{
+async function verifytoken(req, res) {
+    try {
         let token = req.session.token
-        if (token){
-            res.send({message: "success"})
-        }else{
-            res.send({message: "fail"})
+        if (token) {
+            res.send({ message: "success" })
+        } else {
+            res.send({ message: "fail" })
         }
         console.log(token);
-    }catch(err){
+    } catch (err) {
         console.log(err);
     }
 }
 
-async function adduser (req, res, next) {
+async function adduser(req, res, next) {
     try {
         const hashPassword = bcrypt.hashSync(req.body.password, 10)
         const newUsercopy = new newuser({
@@ -70,10 +70,11 @@ async function adduser (req, res, next) {
             password: hashPassword
         });
         await newUsercopy.save()
-            .then(data => {
-                res.json(data, {message: "success"})
-                console.log("data collected");
-            })
+        res.send({ message: "success" })
+        // .then(data => {
+        //     res.json(data)
+        //     console.log("data collected");
+        // })
 
     } catch (err) {
         next(err)
