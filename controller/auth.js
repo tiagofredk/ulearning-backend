@@ -71,7 +71,7 @@ async function adduser (req, res, next) {
         });
         await newUsercopy.save()
             .then(data => {
-                res.json(data, {message: "success"})
+                res.json(data)
                 console.log("data collected");
             })
 
