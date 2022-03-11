@@ -12,7 +12,7 @@ async function login(req, res) {
     }
 
     const user = await users.findOne({ email: email })
-    console.log(user);
+    // console.log(user);
     try {
         if (user) {
             const check = bcrypt.compareSync(password, user.password)
@@ -20,6 +20,7 @@ async function login(req, res) {
                 const token = jwt.sign({ email: email }, process.env.JWT_SECRET)
                 req.session.authenticated = true
                 req.session.token = token
+                req.session.user = user
                 // res.cookie("token", token).send("authenticated")
                 res.send(user);
                 // console.log(token);
@@ -51,12 +52,14 @@ async function logout(req, res) {
 async function verifytoken(req, res) {
     try {
         let token = req.session.token
+        let session = req.session
         if (token) {
-            res.send({ message: "success" })
+            res.send({session, message: "success" })
         } else {
             res.send({ message: "fail" })
         }
-        console.log(token);
+        // console.log(token);
+        // console.log(session);
     } catch (err) {
         console.log(err);
     }
