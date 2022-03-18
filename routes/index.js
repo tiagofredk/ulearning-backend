@@ -8,7 +8,7 @@ router.post('/login', authController.login);
 router.get("/logout", authController.logout);
 router.get("/verifytoken", authController.verifytoken);
 router.post("/adduser", authController.adduser);
-router.post("/message", authController.message)
+router.post("/message", authController.message);
 
 // all routes that come after this middleware are protected
 // and can only be accessed if the user is logged in
