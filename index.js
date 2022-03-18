@@ -24,7 +24,7 @@ connectDB();
 app.get("/", (req, res)=> {
     res.send({
         status: 200,
-        message: "Api is working"
+        message: "Backend is working"
     })
 })
 app.use(session);

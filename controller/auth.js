@@ -3,6 +3,7 @@ const users = require("../schema/newuser");
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const newuser = require("../schema/newuser");
+const newmessage = require("../schema/newmessage")
 
 async function login(req, res) {
     const { email, password } = req.body;
@@ -74,10 +75,20 @@ async function adduser(req, res, next) {
         });
         await newUsercopy.save()
         res.send({ message: "success" })
-        // .then(data => {
-        //     res.json(data)
-        //     console.log("data collected");
-        // })
+
+    } catch (err) {
+        next(err)
+    }
+}
+
+async function message(req, res, next) {
+    try {
+        
+        const newMessage = new newmessage({
+            ...req.body
+        });
+        await newMessage.save()
+        res.send({ message: "success" })
 
     } catch (err) {
         next(err)
@@ -88,5 +99,6 @@ module.exports = {
     login,
     logout,
     verifytoken,
-    adduser
+    adduser,
+    message
 };
