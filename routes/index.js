@@ -4,10 +4,6 @@ const authenticate = require('../middleware/authenticate');
 const authController = require('../controller/auth');
 const profileController = require('../controller/profile');
 
-router.post('/login', authController.login);
-router.get("/logout", authController.logout);
-router.get("/verifytoken", authController.verifytoken);
-router.post("/adduser", authController.adduser);
 router.post("/message", authController.message);
 
 // all routes that come after this middleware are protected
