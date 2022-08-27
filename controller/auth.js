@@ -15,8 +15,11 @@ async function login(req, res) {
     const user = await users.findOne({ email: email })
     // console.log(user);
     try {
+        
         if (user) {
+
             const check = bcrypt.compareSync(password, user.password)
+            
             if (check) {
                 const token = jwt.sign({ email: email }, process.env.JWT_SECRET)
                 req.session.authenticated = true

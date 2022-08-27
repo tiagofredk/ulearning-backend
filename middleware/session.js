@@ -6,7 +6,7 @@ const RedisStore = connectRedis(session);
 
 module.exports = session({
   store: new RedisStore({ client: client }),
-  secret: 'mySecret',
+  secret: process.env.SESSION_SECRET,
   saveUninitialized: false,
   resave: false,
   name: 'sessionId',
